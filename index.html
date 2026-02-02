@@ -3,103 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Site Index</title>
+  <title>Index — Files</title>
   <style>
-    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0}
-    body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0f172a;color:#e6eef8}
-    .card{width:min(920px,96%);background:linear-gradient(180deg,#071029 0%, #0b2238 100%);padding:28px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.6)}
-    h1{margin:0 0 12px;font-size:1.6rem}
-    p{margin:0 0 18px;color:#9fb2cf}
-    .buttons{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
-    button, .link-btn{background:#2563eb;color:white;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}
-    button.secondary{background:#0ea5a4}
-    button.ghost{background:transparent;border:1px solid rgba(255,255,255,.08);color:#cfe6ff}
-    input[type="text"], textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);color:#dff;resize:vertical}
-    label{display:block;font-size:.85rem;margin:10px 0 6px;color:#9fb2cf}
-    .row{display:flex;gap:10px}
-    .row > *{flex:1}
-    footer{margin-top:14px;font-size:.78rem;color:#9fb2cf}
-    a.link-btn{text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:0;background:#0b1220;color:#e6eef8;display:flex;align-items:center;justify-content:center;min-height:100vh}
+    .box{background:#071428;padding:28px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.6);max-width:720px;width:92%}
+    h1{margin:0 0 10px;font-size:1.25rem}
+    p{margin:0 0 16px;color:#9fb2cf}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    a.button{display:inline-block;padding:10px 14px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600}
+    a.button.secondary{background:#0ea5a4}
+    footer{margin-top:14px;color:#9fb2cf;font-size:.86rem}
   </style>
 </head>
 <body>
-  <main class="card" role="main">
-    <h1>Welcome — Index with action buttons</h1>
-    <p>
-      Use the buttons below to open the dragon page, download files, or create a file from text and download it.
-      If you intend to preserve your current index.html as dragon.html in the repo, follow the Git commands shown after these files.
-    </p>
+  <main class="box" role="main">
+    <h1>Files</h1>
+    <p>Use the buttons below to go to the files in this site.</p>
 
-    <div class="buttons" aria-hidden="false">
-      <button id="openDragon">Open dragon.html</button>
-      <button id="downloadDragon" class="secondary">Download dragon.html</button>
-      <button id="downloadThis" class="ghost">Download this index.html</button>
+    <div class="actions" role="navigation" aria-label="File links">
+      <!-- Opens the renamed index (dragon.html) once you rename the current index -->
+      <a class="button" href="dragon.html">Open DragonX Client</a>
+      <a class="button" href="uwu.html">Open UwU Client</a>
+      <a class="button" href="flame.html">Open FlameClient 3.7</a>
+      <!-- Link to the repository file listing on GitHub so visitors can browse files -->
+      <a class="button secondary" href="https://github.com/jbaejb327alt/jbaejb327alt.github.io">Open repository (files)</a>
     </div>
 
-    <section>
-      <label for="filename">Create a file from text (enter filename)</label>
-      <div class="row">
-        <input id="filename" type="text" placeholder="example.txt" value="example.txt" />
-        <button id="createFile">Create & Download</button>
-      </div>
-      <label for="filecontent">File content</label>
-      <textarea id="filecontent" rows="8" placeholder="Type file content here...">Hello — this is a file created from the site.</textarea>
-    </section>
-
     <footer>
-      Tip: After you rename your old index.html to dragon.html in the repository, the "Open dragon.html" and "Download dragon.html" buttons will work as expected.
+      After you run the rename below, visitors who click "Open dragon.html" will be taken to the previous index content.
     </footer>
   </main>
-
-  <script>
-    // Navigate to dragon.html (relative)
-    document.getElementById('openDragon').addEventListener('click', function() {
-      window.location.href = 'dragon.html';
-    });
-
-    // Download a file by fetching it from the server (filename must exist on server)
-    async function fetchAndDownload(url, downloadName) {
-      try {
-        const res = await fetch(url, {cache: "no-store"});
-        if (!res.ok) throw new Error('Network error: ' + res.status);
-        const text = await res.text();
-        const blob = new Blob([text], { type: 'text/html' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = downloadName || url.split('/').pop();
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(a.href);
-      } catch (err) {
-        alert('Failed to fetch ' + url + ': ' + err.message);
-      }
-    }
-
-    // Buttons wired up
-    document.getElementById('downloadDragon').addEventListener('click', function() {
-      fetchAndDownload('dragon.html', 'dragon.html');
-    });
-
-    // Download current index.html by fetching itself
-    document.getElementById('downloadThis').addEventListener('click', function() {
-      // try both plain 'index.html' and root (/) to handle hosting differences
-      fetchAndDownload('index.html', 'index.html');
-    });
-
-    // Create a file from textarea and download it
-    document.getElementById('createFile').addEventListener('click', function() {
-      const filename = document.getElementById('filename').value.trim() || 'file.txt';
-      const content = document.getElementById('filecontent').value;
-      const blob = new Blob([content], { type: 'text/plain' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(a.href);
-    });
-  </script>
 </body>
 </html>
