@@ -1,7 +1,8 @@
 # jbaejb327alt.github.io
 
 Make Minecraft hacks accessible to everyone, everywhere.
-
+this README.md is mostly ai lmfao
+im ass at making README.md(s)
 ## Overview
 
 A browser-based Minecraft experience designed for players who can't afford the official game or use Chromebooks. Play Minecraft with built-in cheats and features directly from your web browser - no installation required.
@@ -17,15 +18,15 @@ A browser-based Minecraft experience designed for players who can't afford the o
 ## 🚀 Getting Started
 
 1. Navigate to any of the available game pages:
-   - [Standard Edition](index.html)
-   - [Dragon Mode](dragon.html)
-   - [Flame Mode](flame.html)
-   - [N0va](n0va.html)
-   - [Odd Future](oddfuture.html)
-   - [Pi Edition](pi.html)
+   - [Menu](index.html)
+   - [DragonClient](dragon.html)
+   - [FlameClient](flame.html)
+   - [N0VA Client](n0va.html)
+   - [OddFuture](oddfuture.html)
+   - [PiClient](pi.html)
    - [Starlike](starlike.html)
-   - [UwU Mode](uwu.html)
-   - [Wurstx](wurstx.html)
+   - [UwU Client](uwu.html)
+   - [WurstX](wurstx.html)
 
 2. Click to start playing
 3. Enjoy Minecraft with cheats!
